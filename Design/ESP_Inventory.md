@@ -52,6 +52,7 @@ No changes
 
 ### 2NF
 
+No changes
 
 ### 3NF
 
