@@ -26,6 +26,8 @@
 
 ### 3NF
 
+No changes
+
 ### Final Tables
 
 ### ERD
