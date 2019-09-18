@@ -20,9 +20,9 @@
 
 ### 2NF
 
-**OrderHistory** <span class='rg'><b class='pk'><i class='fk'>ItemNumber, PONumber</b>, Quantity, Cost</span>
+**OrderHistory** <span class='md'><b class='pk'><i class='fk'>ItemNumber, PONumber</b>, Quantity, Cost</span>
 
-**PurchaseOrder** <span class='rg'><b class='pk'>PONumber</b>, SupplierNumber, Date</span>
+**PurchaseOrder** <span class='md'><b class='pk'>PONumber</b>, SupplierNumber, Date</span>
 
 ### 3NF
 
