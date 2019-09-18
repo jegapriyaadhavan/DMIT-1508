@@ -16,11 +16,11 @@
 
 **Inventory** <span class='md'><b class='pk'>ItemNumber</b>, ItemDescription, CurrentSalePrice, InStockCount, ReorderValue</span>
 
-**OrderHistory** <span class='rg'><b class='pk'>ItemNumber, PONumber</b>, SupplierNumber, Date, Quantity, Cost</span>
+**OrderHistory** <span class='md'><b class='pk'><i class='fk'>ItemNumber</i>, PONumber</b>, SupplierNumber, Date, Quantity, Cost</span>
 
 ### 2NF
 
-**OrderHistory** <span class='rg'><b class='pk'>ItemNumber, PONumber</b>, Quantity, Cost</span>
+**OrderHistory** <span class='rg'><b class='pk'><i class='fk'>ItemNumber, PONumber</b>, Quantity, Cost</span>
 
 **PurchaseOrder** <span class='rg'><b class='pk'>PONumber</b>, SupplierNumber, Date</span>
 
