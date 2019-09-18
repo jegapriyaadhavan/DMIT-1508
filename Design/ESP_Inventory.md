@@ -42,6 +42,7 @@ No changes
 
 ### 0NF
 
+**PurchaseOrder** <span class='md'><b class='pk'>PurchaseOrderNumber</b>, SupplierName, SupplierNumber, Address, City, Province, PostalCode, Phone, Date, <b class='rg'> ItemNumber, SupplierItemNumber, SupplierDescription, Quantity, Cost, Amount</b>, SubTotal, GST, Total</span>
 
 ### 1NF
 
