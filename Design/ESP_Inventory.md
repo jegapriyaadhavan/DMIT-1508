@@ -56,6 +56,13 @@ No changes
 
 ### 3NF
 
+**PurchaseOrder** <span class='md'><b class='pk'>PurchaseOrderNumber</b>, <i class='fk'> SupplierNumber </i>, Phone, Date, SubTotal, GST, Total</span>
+
+**Supplier** <span class ='md'><b class= 'pk'>SupplierNumber</b>, SupplierName, Address, City, Province, PostalCode, Phone</span>
+
+**PurchaseOrderItem** <span class='md'> <b class='pk'><i class='fk'>PurchaseOrderNumber</i>,ItemNumber</b>, SupplierItemNumber, SupplierDescription, Quantity, Cost, Amount</span>
+
+
 -----
 
 ## Legend
