@@ -1,22 +1,23 @@
-# Inventory Control Sheet
 
-> *The requirements for this normalization can be found at follow link:*
->[ESP Part3](https://dmit-1508.github.io/demos/esp/specs/ESP-3-Specs.html)
+## News 2 GO!
+## Newspaper distribution
 
 
-## Inventory Control
+## Customer Profile View
 
 > *Description or Image*
 
 ### 0NF
 
-**Inventory** <span class='md'><b class='pk'>ItemNumber</b>, ItemDescription, CurrentSalePrice, <b class='rg'> Date, SupplierNumber, PONumber, Quantity, Cost</b>, InStockCount, ReorderValue</span>
+**Customer** <span class='md'><b class='pk'>CustomerID</b>, CustomerFirstName, CustomerLastName,Address,City,Province,PostalCode, PrePaidTip, RouteID, RouteName, <b class='rg'>PaperID, PaperDesc, DeliveryTypeID, DeliveryTypeDesc, DeliveryTypeCharge </b> </span>
                              
 ### 1NF
 
-**Inventory** <span class='md'><b class='pk'>ItemNumber</b>, ItemDescription, CurrentSalePrice, InStockCount, ReorderValue</span>
+**Customer** <span class='md'><b class='pk'>CustomerID</b>, CustomerFirstName, CustomerLastName,Address,City,Province,PostalCode, PrePaidTip, RouteID, RouteName </span>
 
-**OrderHistory** <span class='md'><b class='pk'><i class='fk'>ItemNumber</i>, PONumber</b>, SupplierNumber, Date, Quantity, Cost</span>
+**Paper** <span class='md'><b class='pk'>PaperID </b>, PaperDesc</span>
+
+**Delivery** <span class='md'><b class='pk'>DeliveryTypeID </b>, DeliveryTypeDesc, DeliveryTypeCharge </span>
 
 ### 2NF
 
