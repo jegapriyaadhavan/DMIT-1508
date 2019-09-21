@@ -21,50 +21,156 @@
 
 ### 2NF
 
-**OrderHistory** <span class='md'><b class='pk'><i class='fk'>ItemNumber</i>, <i class='fk'>PONumber</i></b>, Quantity, Cost</span>
+**Customer** <span class='md'><b class='pk'>CustomerID</b>, CustomerFirstName, CustomerLastName,Address,City,Province,PostalCode, PrePaidTip ,<i class='fk'> RouteID </i> </span>
 
-**PurchaseOrder** <span class='md'><b class='pk'>PONumber</b>, SupplierNumber, Date</span>
+**Route** <span class='md'><b class='pk'> RouteID</b>, RouteName </span>
+
+**CustomerOrder** <span class='md'><b class='pk'><i class='fk'>CustomerID, PaperID </i></b>, DeliveryTypeID</span>
 
 ### 3NF
 
-No changes
+**CustomerOrder** <span class='md'><b class='pk'><i class='fk'>CustomerID, PaperID, DeliveryTypeID</i></b></span>
 
 ### Final Tables
 
-### ERD
+**Customer** <span class='md'><b class='pk'>CustomerID</b>, CustomerFirstName, CustomerLastName,Address,City,Province,PostalCode, PrePaidTip ,<i class='fk'> RouteID </i> </span>
 
-![VIEW_NAME ERD](./Logical-ERD.png)
+**Route** <span class='md'><b class='pk'> RouteID</b>, RouteName </span>
+
+**Paper** <span class='md'><b class='pk'>PaperID </b>, PaperDesc</span>
+
+**Delivery** <span class='md'><b class='pk'>DeliveryTypeID </b>, DeliveryTypeDesc, DeliveryTypeCharge </span>
+
+**CustomerOrder** <span class='md'><b class='pk'><i class='fk'>CustomerID, PaperID, DeliveryTypeID</i></b></span>
+
+### Customer Profile View ERD
+
+![Customer Profile View ERD](./CustomerProfileView.png)
 
 ----
 
-## Purchase Order Form
+##  Distributors Routes Summary View
 
 > *About*
 
 ### 0NF
 
-**PurchaseOrder** <span class='md'><b class='pk'>PurchaseOrderNumber</b>, SupplierName, SupplierNumber, Address, City, Province, PostalCode, Phone, Date, <b class='rg'> ItemNumber, SupplierItemNumber, SupplierDescription, Quantity, Cost, Amount</b>, SubTotal, GST, Total</span>
+**Zone** <span class='md'><b class='pk'>ZoneID</b>, ZoneName, ManagerFName, ManagerLName, CellNumber, <b class='rg'> RegionId, RegionName, SupervisorFName, SupervisorLName, RouteID, RouteName, CarrierID, DropSiteID </b></span>
 
 ### 1NF
 
-**PurchaseOrder** <span class='md'><b class='pk'>PurchaseOrderNumber</b>, SupplierName, SupplierNumber, Address, City, Province, PostalCode, Phone, Date, SubTotal, GST, Total</span>
+**Zone** <span class='md'><b class='pk'>ZoneID</b>, ZoneName, ManagerFName, ManagerLName, CellNumber</span>
 
-**PurchaseOrderItem** <span class='md'> <b class='pk'><i class='fk'>PurchaseOrderNumber</i>,ItemNumber</b>, SupplierItemNumber, SupplierDescription, Quantity, Cost, Amount</span>
+**Region** <span class='md'><b class='pk'>RegionId</b> RegionName, SupervisorFName, SupervisorLName, RouteID, RouteName, CarrierID, DropSiteID </span>
 
 ### 2NF
 
-No changes
+**Zone** <span class='md'><b class='pk'>ZoneID</b>, ZoneName, ManagerFName, ManagerLName, CellNumber</span>
+
+**Region** <span class='md'><b class='pk'>RegionId</b> RegionName, SupervisorFName, SupervisorLName</span>
+
+**Route** <span class='md'><b class='pk'> RouteID</b>, RouteName, CarrierID, DropSiteID </span>
 
 ### 3NF
 
-**PurchaseOrder** <span class='md'><b class='pk'>PurchaseOrderNumber</b>, <i class='fk'> SupplierNumber </i>, Phone, Date, SubTotal, GST, Total</span>
+**Zone** <span class='md'><b class='pk'>ZoneID</b>, ZoneName, ManagerFName, ManagerLName, CellNumber</span>
 
-**Supplier** <span class ='md'><b class= 'pk'>SupplierNumber</b>, SupplierName, Address, City, Province, PostalCode, Phone</span>
+**Region** <span class='md'><b class='pk'>RegionId</b> RegionName, SupervisorFName, SupervisorLName</span>
 
-**PurchaseOrderItem** <span class='md'> <b class='pk'><i class='fk'>PurchaseOrderNumber</i>,ItemNumber</b>, SupplierItemNumber, SupplierDescription, Quantity, Cost, Amount</span>
+**Route** <span class='md'><b class='pk'> RouteID</b>, RouteName, CarrierID, DropSiteID </span>
 
+**DistributorRoute** <span class='md'><b class='pk'> <i class='fk'>ZoneID, RegionID, RouteID</i></b></span>
+
+### Final Tables
+
+**Zone** <span class='md'><b class='pk'>ZoneID</b>, ZoneName, ManagerFName, ManagerLName, CellNumber</span>
+
+**Region** <span class='md'><b class='pk'>RegionId</b> RegionName, SupervisorFName, SupervisorLName</span>
+
+**Route** <span class='md'><b class='pk'> RouteID</b>, RouteName, CarrierID, DropSiteID </span>
+
+**DistributorRoute** <span class='md'><b class='pk'> <i class='fk'>ZoneID, RegionID, RouteID</i></b></span>
+
+
+### Distributors Routes Summary View ERD
+
+![Distributors Routes Summary View ERD](./DistributorsRoute.png)
 
 -----
+## Drop Site Delivery Orders View 
+
+> *Description or Image*
+
+### 0NF
+
+**DropSite** <span class='md'><b class='pk'>DropSiteID</b>, DropSiteName, DropSiteAddress,<b class='rg'> RouteID, RouteName, CarrierID, CarrierName, CarrierPhone</b> </span>
+                             
+### 1NF
+**DropSite** <span class='md'><b class='pk'>DropSiteID</b>, DropSiteName, DropSiteAddress </span>
+
+**Route** <span class='md'><b class='pk'>RouteID </b>, RouteName </span>
+
+**Carrier** <span class='md'><b class='pk'>CarrierID</b>, CarrierName, CarrierPhone </span>
+
+### 2NF
+
+No change.
+
+### 3NF
+
+**DropSiteDeliveryOrder** <span class='md'><b class='pk'> <i class='fk'>DropSiteID, RouteID, CarrierID </i></b></span>
+
+### Final Tables
+
+**DropSite** <span class='md'><b class='pk'>DropSiteID</b>, DropSiteName, DropSiteAddress </span>
+
+**Route** <span class='md'><b class='pk'>RouteID </b>, RouteName </span>
+
+**Carrier** <span class='md'><b class='pk'>CarrierID</b>, CarrierName, CarrierPhone </span>
+
+**DropSiteDeliveryOrder** <span class='md'><b class='pk'> <i class='fk'>DropSiteID, RouteID, CarrierID </i></b></span>
+
+
+### Drop Site Delivery Orders View  ERD
+
+![Drop Site Delivery Orders View  ERD](./DropSiteDeliveryOrder.png)
+
+----
+
+## News 2 GO!
+
+## Merged ERD
+
+**Customer** <span class='md'><b class='pk'>CustomerID</b>, CustomerFirstName, CustomerLastName,Address,City,Province,PostalCode, PrePaidTip ,<i class='fk'> RouteID </i> </span>
+
+**Paper** <span class='md'><b class='pk'>PaperID </b>, PaperDesc</span>
+
+**Delivery** <span class='md'><b class='pk'>DeliveryTypeID </b>, DeliveryTypeDesc, DeliveryTypeCharge </span>
+
+**CustomerOrder** <span class='md'><b class='pk'><i class='fk'>CustomerID, PaperID, DeliveryTypeID</i></b></span>
+
+
+
+**Zone** <span class='md'><b class='pk'>ZoneID</b>, ZoneName, ManagerFName, ManagerLName, CellNumber</span>
+
+**Region** <span class='md'><b class='pk'>RegionId</b> RegionName, SupervisorFName, SupervisorLName</span>
+
+**Route** <span class='md'><b class='pk'> RouteID</b>, RouteName, CarrierID, DropSiteID </span>
+
+**DistributorRoute** <span class='md'><b class='pk'> <i class='fk'>ZoneID, RegionID, RouteID</i></b></span>
+
+
+
+**DropSite** <span class='md'><b class='pk'>DropSiteID</b>, DropSiteName, DropSiteAddress </span>
+
+**Carrier** <span class='md'><b class='pk'>CarrierID</b>, CarrierName, CarrierPhone </span>
+
+**DropSiteDeliveryOrder** <span class='md'><b class='pk'> <i class='fk'>DropSiteID, RouteID, CarrierID </i></b></span>
+
+### News 2 GO! ERD
+
+![News 2 GO!  ERD](./News2GO.png)
+
 
 ## Legend
 
