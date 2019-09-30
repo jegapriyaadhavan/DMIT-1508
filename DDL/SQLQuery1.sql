@@ -127,7 +127,10 @@ CREATE TABLE OrderDetails
 
 CREATE TABLE [Payments]
 (
-	[PaymentID]			 int					 NOT NULL,
+	[PaymentID]			 int		
+		CONSTRAINT PK_Payments_PaymentID
+            PRIMARY KEY
+        IDENTITY(300, 1)						 NOT NULL,
 	[Date]				 datetime			     NOT NULL,
 	[PaymentAmount]		 money					 NOT NULL,
 	[PaymentType]		 varchar(7)				 NOT NULL
@@ -135,8 +138,14 @@ CREATE TABLE [Payments]
 
 CREATE TABLE [PaymentLogDetails]
 (
-	[OrderNumber]				int					 NOT NULL,
-	[PaymentID]					int					 NOT NULL,
+	[OrderNumber]				int			
+		CONSTRAINT FK_PaymentLogDetails_PaymentID_Orders_OrderNumber
+            FOREIGN KEY REFERENCES
+            Orders(OrderNumber)					     NOT NULL,
+	[PaymentID]					int			
+		CONSTRAINT FK_PaymentLogDetails_PaymentID_Payments_PaymentID
+            FOREIGN KEY REFERENCES
+            Payments(PaymentID)						 NOT NULL,
 	[PaymentNumber]				smallint			 NOT NULL,
 	[BalanceOwing]				money				 NOT NULL,
 	[DepositBatchNaumber]		int					 NOT NULL
