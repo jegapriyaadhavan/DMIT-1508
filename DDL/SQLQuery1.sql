@@ -77,12 +77,15 @@ CREATE TABLE Orders
     OrderNumber     int  
 		CONSTRAINT PK_Orders_OrderNumber
             PRIMARY KEY
-        IDENTITY(200, 1)                NOT NULL,
-    CustomerNumber  int                 NOT NULL,
-    [Date]          datetime            NOT NULL,
-    Subtotal        money               NOT NULL,
-    GST             money               NOT NULL,
-    Total           money               NOT NULL
+        IDENTITY(200, 1)						NOT NULL,
+    CustomerNumber  int         
+		 CONSTRAINT FK_Orders_CustomerNumber_Customers_CustomerNumber
+            FOREIGN KEY REFERENCES
+            Customers(CustomerNumber)			NOT NULL,
+    [Date]          datetime					NOT NULL,
+    Subtotal        money					    NOT NULL,
+    GST             money                       NOT NULL,
+    Total           money                       NOT NULL
 )
 
 CREATE TABLE InventoryItems
