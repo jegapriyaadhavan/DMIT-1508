@@ -26,6 +26,12 @@ GO  -- this statement helps to "separate" various DDL statements in our script
 /* DROP TABLE statements (to "clean up" the database for re-creation)  */
 /*   You should drop tables in the REVERSE order in which you created them */  
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'PaymentLogDetails')
+    DROP TABLE PaymentLogDetails
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Payments')
+    DROP TABLE Payments
+
+
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'OrderDetails')
     DROP TABLE OrderDetails
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'InventoryItems')
@@ -35,6 +41,7 @@ IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Orders')
     DROP TABLE Orders
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Customers')
     DROP TABLE Customers
+
 
 -- To create a database table, we use the CREATE TABLE statement.
 -- Note that the order in which we create/drop tables is important
@@ -84,3 +91,22 @@ CREATE TABLE OrderDetails
 
 
 /* =========================== Practice SQL Below ========================= */
+
+
+CREATE TABLE Payments
+(
+	PaymentID		 int					 NOT NULL,
+	[Date]			 datetime			     NOT NULL,
+	PaymentAmount	 money					 NOT NULL,
+	PaymentType		 varchar(7)				 NOT NULL
+)
+
+CREATE TABLE PaymentLogDetails
+(
+	OrderNumber			int					 NOT NULL,
+	PaymentID			int					 NOT NULL,
+	PaymentNumber		smallint			 NOT NULL,
+	BalanceOwing		money				 NOT NULL,
+	DepositBatchNaumber	int					 NOT NULL
+)
+
