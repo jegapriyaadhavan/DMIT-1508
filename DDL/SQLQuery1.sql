@@ -113,7 +113,12 @@ CREATE TABLE OrderDetails
             InventoryItems(ItemNumber)    NOT NULL,
     Quantity        int					  NOT NULL,
     SellingPrice    money				  NOT NULL,
-    Amount          money				  NOT NULL
+    Amount          money				  NOT NULL,
+	-- The following is a Table Constraint
+    -- A composite primary key MUST be done as a Table Constraint
+    -- because it involves two or more columns
+    CONSTRAINT PK_OrderDetails_OrderNumber_ItemNumber
+        PRIMARY KEY (OrderNumber, ItemNumber) -- Specify all the columns in the PK
 )
 
 
