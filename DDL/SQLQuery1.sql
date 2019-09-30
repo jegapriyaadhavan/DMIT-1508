@@ -26,6 +26,11 @@ GO  -- this statement helps to "separate" various DDL statements in our script
 /* DROP TABLE statements (to "clean up" the database for re-creation)  */
 /*   You should drop tables in the REVERSE order in which you created them */  
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'OrderDetails')
+    DROP TABLE OrderDetails
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'InventoryItems')
+    DROP TABLE InventoryItems
+
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Orders')
     DROP TABLE Orders
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Customers')
