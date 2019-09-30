@@ -95,18 +95,18 @@ CREATE TABLE OrderDetails
 
 CREATE TABLE Payments
 (
-	PaymentID		 int					 NOT NULL,
-	[Date]			 datetime			     NOT NULL,
-	PaymentAmount	 money					 NOT NULL,
-	PaymentType		 varchar(7)				 NOT NULL
+	[PaymentID]			 int					 NOT NULL,
+	[Date]				 datetime			     NOT NULL,
+	[PaymentAmount]		 money					 NOT NULL,
+	[PaymentType]		 varchar(7)				 NOT NULL
 )
 
 CREATE TABLE PaymentLogDetails
 (
-	OrderNumber			int					 NOT NULL,
-	PaymentID			int					 NOT NULL,
-	PaymentNumber		smallint			 NOT NULL,
-	BalanceOwing		money				 NOT NULL,
-	DepositBatchNaumber	int					 NOT NULL
+	[OrderNumber]				int					 NOT NULL,
+	[PaymentID]					int					 NOT NULL,
+	[PaymentNumber]				smallint			 NOT NULL,
+	[BalanceOwing]				money				 NOT NULL,
+	[DepositBatchNaumber]		int					 NOT NULL
 )
 
