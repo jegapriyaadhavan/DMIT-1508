@@ -1,6 +1,7 @@
 /* **********************************************
  * Simple Table Creation - Columns and Primary Keys
  *
+ * File: DDL-Practice.sql
  * Emergency Service & Product
  * Specification Document 1
  * Version 1.0.0
@@ -16,3 +17,7 @@ USE [ESP-A01] -- this is a statement that tells us to switch to a particular dat
 -- the use of square brackets are optional.
 GO  -- this statement helps to "separate" various DDL statements in our script
     -- so that they are executed as "blocks" of code.
+
+-- TIP: To refresh this script's knowlege of the DB, Press [ctrl] + [shift] + r
+
+/* =========================== Practice SQL Below ========================= */
