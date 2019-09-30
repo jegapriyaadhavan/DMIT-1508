@@ -47,7 +47,7 @@ IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Customers
 -- Note that the order in which we create/drop tables is important
 -- because of how the tables are related via Foreign Keys.
 
-CREATE TABLE Customers
+CREATE TABLE [dbo].[Customers]
 (
     -- The body of a CREATE TABLE will identify a comma-separated list of
     -- Column Declarations and Table Constraints.
@@ -93,7 +93,7 @@ CREATE TABLE OrderDetails
 /* =========================== Practice SQL Below ========================= */
 
 
-CREATE TABLE Payments
+CREATE TABLE [Payments]
 (
 	[PaymentID]			 int					 NOT NULL,
 	[Date]				 datetime			     NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE Payments
 	[PaymentType]		 varchar(7)				 NOT NULL
 )
 
-CREATE TABLE PaymentLogDetails
+CREATE TABLE [PaymentLogDetails]
 (
 	[OrderNumber]				int					 NOT NULL,
 	[PaymentID]					int					 NOT NULL,
@@ -110,3 +110,7 @@ CREATE TABLE PaymentLogDetails
 	[DepositBatchNaumber]		int					 NOT NULL
 )
 
+-- Note that square brackets around identifiers is a common standard in writing SQL.
+-- DBs in SQL group all their contents into something called a "schema". Each db can have one or more schemas.
+-- The default schema name is [dbo].
+-- Schema names are appiled to top-level objects, like table names.
