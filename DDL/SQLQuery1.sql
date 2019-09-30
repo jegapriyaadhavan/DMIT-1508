@@ -94,7 +94,9 @@ CREATE TABLE InventoryItems
 		 CONSTRAINT PK_InventoryItems_ItemNumber
             PRIMARY KEY                     NOT NULL,
     ItemDescription     varchar(50)             NULL,
-    CurrentSalePrice    money               NOT NULL,
+    CurrentSalePrice    money          
+		 CONSTRAINT CK_InventoryItems_CurrentSalePrice
+            CHECK (CurrentSalePrice > 0)    NOT NULL,
     InStockCount        int                 NOT NULL,
     ReorderLevel        int                 NOT NULL
 )
@@ -104,11 +106,14 @@ CREATE TABLE OrderDetails
     OrderNumber     int      
 		 CONSTRAINT FK_OrderDetails_OrderNumber_Orders_OrderNumber
             FOREIGN KEY REFERENCES
-            Orders(OrderNumber)         NOT NULL,
-    ItemNumber      varchar(5)          NOT NULL,
-    Quantity        int                 NOT NULL,
-    SellingPrice    money               NOT NULL,
-    Amount          money               NOT NULL
+            Orders(OrderNumber)			  NOT NULL,
+    ItemNumber      varchar(5)      
+		  CONSTRAINT FK_OrderDetails_ItemNumber_InventoryItems_ItemNumber
+            FOREIGN KEY REFERENCES
+            InventoryItems(ItemNumber)    NOT NULL,
+    Quantity        int					  NOT NULL,
+    SellingPrice    money				  NOT NULL,
+    Amount          money				  NOT NULL
 )
 
 
