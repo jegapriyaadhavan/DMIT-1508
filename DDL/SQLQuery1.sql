@@ -133,7 +133,10 @@ CREATE TABLE [Payments]
         IDENTITY(300, 1)						 NOT NULL,
 	[Date]				 datetime			     NOT NULL,
 	[PaymentAmount]		 money					 NOT NULL,
-	[PaymentType]		 varchar(7)				 NOT NULL
+	[PaymentType]		 varchar(7)				 NOT NULL,
+
+     CONSTRAINT PK_PaymentLogDetails_OrderNumber_PaymentID
+        PRIMARY KEY (OrderNumber, PaymentID)
 )
 
 CREATE TABLE [PaymentLogDetails]
