@@ -67,7 +67,29 @@ CREATE TABLE [dbo].[Customers]
     LastName        varchar(60)         NOT NULL,
     [Address]       varchar(40)         NOT NULL,
     City            varchar(35)         NOT NULL,
-    Province        char(2)             NOT NULL,
+    Province        char(2)  
+			CONSTRAINT DF_Customers_Province
+				DEFAULT ('AB')
+
+			CONSTRAINT CK_Customers_Province
+				CHECK (Province = 'AB' OR
+					   Province = 'BC' OR
+					   Province = 'SK' OR
+					   Province = 'MB' OR
+					   Province = 'QC' OR
+					   Province = 'ON' OR
+					   Province = 'NT' OR
+					   Province = 'NS' OR
+					   Province = 'NB' OR
+					   Province = 'NL' OR
+					   Province = 'YK' OR
+					   Province = 'PE' OR
+					   Province = 'NU')
+	
+	
+	
+	
+	           NOT NULL,
     PostalCode      char(6)             NOT NULL,
     PhoneNumber     char(13)                NULL  -- NULL means the data is optional
 )
@@ -83,9 +105,15 @@ CREATE TABLE Orders
             FOREIGN KEY REFERENCES
             Customers(CustomerNumber)			NOT NULL,
     [Date]          datetime					NOT NULL,
-    Subtotal        money					    NOT NULL,
-    GST             money                       NOT NULL,
-    Total           money                       NOT NULL
+    Subtotal        money				
+		CONSTRAINT CK_Orders_Subtotal
+			CHECK (Subtotal > 0)
+												NOT NULL,
+    GST             money 
+		CONSTRAINT CK_Orders_GST
+			CHECK (GST >= 0)                      
+												NOT NULL,
+    Total          As Subtotal + GST --This is now a Computed Column                      NOT NULL
 )
 
 CREATE TABLE InventoryItems
@@ -111,9 +139,16 @@ CREATE TABLE OrderDetails
 		  CONSTRAINT FK_OrderDetails_ItemNumber_InventoryItems_ItemNumber
             FOREIGN KEY REFERENCES
             InventoryItems(ItemNumber)    NOT NULL,
-    Quantity        int					  NOT NULL,
-    SellingPrice    money				  NOT NULL,
-    Amount          money				  NOT NULL,
+    Quantity        int					
+		CONSTRAINT DF_OrderDetails_Quantity
+			DEFAULT (1)
+		CONSTRAINT CK_OrderDetails_Quantity
+			CHECK	(Quantity > 0)
+										  NOT NULL,
+    SellingPrice    money
+		CONSTRAINT CK_OrderDetails_SellingPrice
+            CHECK (SellingPrice > 0) 				  NOT NULL,
+    Amount          AS Quantity * SellingPrice,				 
 	-- The following is a Table Constraint
     -- A composite primary key MUST be done as a Table Constraint
     -- because it involves two or more columns
@@ -125,34 +160,7 @@ CREATE TABLE OrderDetails
 /* =========================== Practice SQL Below ========================= */
 
 
-CREATE TABLE [Payments]
-(
-	[PaymentID]			 int		
-		CONSTRAINT PK_Payments_PaymentID
-            PRIMARY KEY
-        IDENTITY(300, 1)						 NOT NULL,
-	[Date]				 datetime			     NOT NULL,
-	[PaymentAmount]		 money					 NOT NULL,
-	[PaymentType]		 varchar(7)				 NOT NULL,
 
-     CONSTRAINT PK_PaymentLogDetails_OrderNumber_PaymentID
-        PRIMARY KEY (OrderNumber, PaymentID)
-)
-
-CREATE TABLE [PaymentLogDetails]
-(
-	[OrderNumber]				int			
-		CONSTRAINT FK_PaymentLogDetails_PaymentID_Orders_OrderNumber
-            FOREIGN KEY REFERENCES
-            Orders(OrderNumber)					     NOT NULL,
-	[PaymentID]					int			
-		CONSTRAINT FK_PaymentLogDetails_PaymentID_Payments_PaymentID
-            FOREIGN KEY REFERENCES
-            Payments(PaymentID)						 NOT NULL,
-	[PaymentNumber]				smallint			 NOT NULL,
-	[BalanceOwing]				money				 NOT NULL,
-	[DepositBatchNaumber]		int					 NOT NULL
-)
 
 -- Note that square brackets around identifiers is a common standard in writing SQL.
 -- DBs in SQL group all their contents into something called a "schema". Each db can have one or more schemas.
