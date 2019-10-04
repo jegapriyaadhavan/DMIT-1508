@@ -84,14 +84,19 @@ CREATE TABLE [dbo].[Customers]
 					   Province = 'NL' OR
 					   Province = 'YK' OR
 					   Province = 'PE' OR
-					   Province = 'NU')
+					   Province = 'NU') 
+											 NOT NULL,
+    PostalCode      char(6)       
+		CONSTRAINT CK_Customers_PostalCode
+			CHECK (PostalCode LIKE '[A-Z][0-9][A-Z][0-9][A-Z][0-9]')
 	
 	
+									      NOT NULL,
+    PhoneNumber     char(13)         
+	 CONSTRAINT CK_Customers_PhoneNumber
+			CHECK (PhoneNumber LIKE '([0-9][0-9][0-9])[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')
 	
-	
-	           NOT NULL,
-    PostalCode      char(6)             NOT NULL,
-    PhoneNumber     char(13)                NULL  -- NULL means the data is optional
+	       NULL  -- NULL means the data is optional
 )
 
 CREATE TABLE Orders
@@ -159,10 +164,39 @@ CREATE TABLE OrderDetails
 
 /* =========================== Practice SQL Below ========================= */
 
+PRINT 'Inserting Customer Data'
+INSERT INTO Customers(FirstName,LastName,[Address],City,PostalCode)
+	VALUES ('Clark', 'Kent', '344 Clinton Street', 'Metropolis', 'S0S0N0')
+INSERT INTO Customers(FirstName,LastName,[Address],City,PostalCode)
+	VALUES ('Jimmy', 'Olsen', '242 River Close', 'Bakerline', 'B4K3R1')
+	PRINT'-- end of customer data --'
+	PRINT ''
 
+
+SELECT CustomerNumber, FirstName, LastName, [Address] + ' ' + City + ','+ Province AS 'Customer Address', PhoneNumber
+FROM Customers
 
 
 -- Note that square brackets around identifiers is a common standard in writing SQL.
 -- DBs in SQL group all their contents into something called a "schema". Each db can have one or more schemas.
 -- The default schema name is [dbo].
 -- Schema names are appiled to top-level objects, like table names.
+
+
+CREATE TABLE Payments
+(
+	PaymentID int
+
+	 CONSTRAINT PK_Payments_PaymentID
+            PRIMARY KEY
+        -- IDENTITY means the database will generate a unique whole-number
+        -- value for this column
+        IDENTITY(1, 1) -- The first number is the "seed",
+                         -- and the last number is the "increment"
+                                        NOT NULL, -- NOT NULL means the data is required
+    [Date] datetime        NOT NULL,
+	PaymentAmount money		NOT NULL,
+	PaymentType varchar(7) NOT NULL
+)
+
+CREATE TABLE PaymentLogDetails
