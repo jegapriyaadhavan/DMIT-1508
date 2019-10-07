@@ -295,18 +295,38 @@ ALTER TABLE Customers
 	-- Adding this as a nullable column, because customers already exist, and we don't have emails for those customers.
 GO
 
-
-
  -- D) Add indexes to the Customer's First and Last Name columns
 
+CREATE NONCLUSTERED INDEX IX_Customers_FirstName
+	ON Customers (FirstName)
+CREATE NONCLUSTERED INDEX IX_Customers_LastName
+	ON Customers (LastName)
+GO -- End of a batch of instructions
+
+
  -- E) Add a default constraint on the Orders.Date column to use the current date.
+
+ -- GETDATE() is a global function in the SQL Server Database
+ -- GETDATE() will obtain the current date/time on the database server
+ ALTER TABLE Orders
+	ADD CONSTRAINT DF_Orders_Date
+		DEFAULT GETDATE() FOR [Date]
+--      Use    	\ this / for \this column/ if no value was supplied when INSERTING dta
+GO
+
+-- To illustrate the default value, consider this sample row for the Orders table
+INSERT INTO Orders(CustomerNumber, Subtotal, GST)
+	VALUES (101, 150.00, 7.50)
+-- Select the current orders
+SELECT OrderNumber, CustomerNumber, Total, [Date]
+FROM Orders
+GO
 
  -- F) Change the InventoryItems.ItemDescription column to be NOT NULL
 
  -- G) Add an index on the Item's Description column, to improve search.
 
  -- H) Data change requests: All inventory items that are less than $5.00 have to have their prices increased by 10%.
-
 
 
 
