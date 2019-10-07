@@ -7,7 +7,7 @@
  * Version 1.0.0
  *
  * Author: Jegapriya Adhavan
- * Date: 30 Sep 2019
+ * Date: 7 Oct 2019
  ********************************************** */
 -- Select the CREATE DATABASE stement below to create the demo database.
 -- CREATE DATABASE [ESP-A01]
@@ -183,20 +183,30 @@ FROM Customers
 -- Schema names are appiled to top-level objects, like table names.
 
 
-CREATE TABLE Payments
-(
-	PaymentID int
 
-	 CONSTRAINT PK_Payments_PaymentID
-            PRIMARY KEY
-        -- IDENTITY means the database will generate a unique whole-number
-        -- value for this column
-        IDENTITY(1, 1) -- The first number is the "seed",
-                         -- and the last number is the "increment"
-                                        NOT NULL, -- NOT NULL means the data is required
-    [Date] datetime        NOT NULL,
-	PaymentAmount money		NOT NULL,
-	PaymentType varchar(7) NOT NULL
-)
+--Let's insert a few rows of data for inventory items
+PRINT 'Inserting inventory items'
+INSERT INTO InventoryItems(ItemNumber, ItemDescription, CurrentSalePrice,
+ InStockCount, ReorderLevel)
+	VALUES ('H8726', 'Cleaning Fan belt', 29.95, 3,5),
+			('H8621','Engine Fan belt' , 17.45,10,5)
 
-CREATE TABLE PaymentLogDetails
+--Let's do a "quick 'n'dirty" select of Inventory Items
+SELECT * FROM InventoryItems
+--Notice how the data in the InventoryItems is already sorted by the PK
+--This is because the PK of a table is (by default) a CLUSTERED INDEX
+
+--Let's do another set of DML statements to add more data to the database
+PRINT 'Inserting an order'
+INSERT INTO Orders(CustomerNumber, [Date], Subtotal, GST)
+	VALUES (100, GETDATE(), 17.45, 0.87)
+INSERT INTO OrderDetails(OrderNumber, ItemNumber, Quantity, SellingPrice)
+	VALUES (200, 'H8726', 1, 17.45)
+PRINT '-- end of order data --'
+PRINT ''
+
+SELECT * FROM Orders
+SELECT * FROM OrderDetails
+
+
+
