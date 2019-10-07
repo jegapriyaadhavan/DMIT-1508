@@ -204,9 +204,37 @@ INSERT INTO OrderDetails(OrderNumber, ItemNumber, Quantity, SellingPrice)
 	VALUES (200, 'H8726', 1, 17.45)
 PRINT '-- end of order data --'
 PRINT ''
+GO
 
 SELECT * FROM Orders
 SELECT * FROM OrderDetails
+
+/* ******************************************
+ * Change Requests for Spec 1
+ * Perform table changes through ALTER statements.
+ * Syntax for ALTER TABLE can be found at
+ *	http://msdn.microsoft.com/en-us/library/ms190273.aspx
+ * ALTER TABLE statements allow us to change an existing table without having to drop it or lose information in the table
+ * *********************************************** */
+
+ -- A) Allow Address, City, Province, and Postal Code to be NULL
+
+ -- B) Add a check constraint on the first and last name to require at least two letters.
+
+ -- C) Add an extra bit of infromation on the Customer table. The client wants to start tracking customer emails, so they can send out
+--statements for outstanding payments that are due at the end of the month.
+
+ -- D) Add indexes to the Customer's First and Last Name columns
+
+ -- E) Add a default constraint on the Orders.Date column to use the current date.
+
+ -- F) Change the InventoryItems.ItemDescription column to be NOT NULL
+
+ -- G) Add an index on the Item's Description column, to improve search.
+
+ -- H) Data change requests: All inventory items that are less than $5.00 have to have their prices increased by 10%.
+
+
 
 
 
