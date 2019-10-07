@@ -330,4 +330,11 @@ GO
 
 
 
+ /*  CREATE TABLE TableName
+ (
+    --Column Definitions
+	-- Table Definitions
+ )
 
+ ColumnName DataType CONSTRAINTS ,(optional)
+ */
