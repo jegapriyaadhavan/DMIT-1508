@@ -1,5 +1,8 @@
 /* School database - DMIT-1508-A01, Jan 2017 
    Table Creation and Load Data Script 
+
+   Name - Jegapriya Adhavan
+   Date - Oct 16 2019
    **************************************** */
 
 -- CREATE DATABASE [A01-School]

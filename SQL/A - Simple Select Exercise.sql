@@ -49,12 +49,16 @@ FROM    Student
 --      and sort the results by the last name
 SELECT    FirstName, LastName
 FROM      Student
-ORDER BY  LastName
+ORDER BY  LastName DESC
 -- 2.d. Select the first and last names of all the students,
 --      and sort the results by the last name, then by the first name
 SELECT    FirstName, LastName
 FROM      Student
 ORDER BY  LastName, FirstName
+
+SELECT    FirstName, LastName
+FROM      Student
+ORDER BY  LastName DESC, FirstName ASC
 
 --3. Select the CourseId and CourseName of all the courses. Use the column aliases of Course ID and Course Name
 SELECT  CourseId AS 'Course ID', CourseName AS 'Course Name'
@@ -70,13 +74,21 @@ WHERE  CourseID = 'DMIT101'
 
 --5. Select the Staff names who have job positionID of 3
 SELECT FirstName, LastName
-       --,PositionID -- Press [ctrl] + k, then [ctrl] + u to un-comment
+    -- ,PositionID -- Press [ctrl] + k, then [ctrl] + u to un-comment
 FROM   Staff
 WHERE  PositionID = 3
 
         -- BTW, what is PositionID of 3 referring to?
 SELECT  PositionID, PositionDescription
 FROM    Position
+
+ --Interlude..
+ SELECT	S.FirstName, S.LastName,  S.StudentID
+ FROM	Student AS S
+ WHERE S.BalanceOwing = 0
+
+-- sp_help Student
+
 
 --6.    Select the Course Names whose course hours are less than 96
 SELECT  C.CourseName
