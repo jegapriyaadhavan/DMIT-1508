@@ -15,7 +15,6 @@ SELECT  AVG(Mark) AS 'Average Mark',
         COUNT(Mark) AS 'How Many Marks'
 FROM    Registration
 
-
 --2.	Select the average Mark of all the students who are taking DMIT104
 SELECT  AVG(Mark) AS 'Average Mark' -- Some Aggregate functions expect to work with numbers
 FROM    Registration
@@ -37,7 +36,8 @@ FROM    Staff
 -- 3.d  Do a count of the people in the Staff table who are no longer working here
 --      Refresh your memory about all the data in the Staff table
 SELECT  * FROM Staff
-SELECT  COUNT(DateReleased) AS 'Retired Staff'
+SELECT  COUNT(DateReleased) AS 'Retired Staff',
+		COUNT(DateHired) AS 'Hired Staff'
 FROM    Staff
 
 --4.	Select how many students have taken (have a grade for) DMIT152
@@ -57,26 +57,42 @@ WHERE   CourseId = 'DMIT152'
 
 --5.	Select the average payment amount for payment type 5
 -- TODO: Student Answer Here - Hint: It's in the Payment table....
-
+SELECT AVG(Amount) AS 'Average Payment'
+FROM Payment AS P
+WHERE P.PaymentTypeID = 5
 
 -- Given that there are some other aggregate methods like MAX(columnName) and MIN(columnName), complete the following two questions:
 --6. Select the highest payment amount
 -- TODO: Student Answer Here
-
+SELECT MAX(Amount) AS 'Highest Payment'
+FROM Payment
 
 --7.	 Select the lowest payment amount
 -- TODO: Student Answer Here
+SELECT MIN(Amount) AS 'Lowest Payment' 
+FROM Payment AS P
 
 
 --8. Select the total of all the payments that have been made
 -- TODO: Student Answer Here
+SELECT SUM(Amount) AS 'Total Payments'
+FROM Payment
 
 --9. How many different payment types does the school accept?
 -- Do a bit of exploratory selects
 SELECT PaymentTypeDescription
 FROM   PaymentType
 -- TODO: Student Answer Here
+SELECT COUNT(PaymentTypeDescription) AS 'Payment Count'
+FROM PaymentType
+
+
 
 --10. How many students are in club 'CSS'?
 -- TODO: Student Answer Here
+
+
+SELECT COUNT(Activity.StudentId)
+FROM Activity
+
 

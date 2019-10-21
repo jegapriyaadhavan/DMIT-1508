@@ -12,7 +12,7 @@ SELECT  CourseId, Mark
 FROM    Registration
 ORDER BY CourseId
 --  Answer to #1
-SELECT  CourseId,                   -- This column is a non-aggregate
+SELECT CourseId,                   -- This column is a non-aggregate
         AVG(Mark) AS 'Average Mark' -- This column performs Aggregate (produce 1 value)
 FROM    Registration
 GROUP BY CourseId                   -- Group by the non-aggregate columns
@@ -26,11 +26,11 @@ SELECT  PaymentTypeID,                              -- Non-aggregate column (btw
 FROM    Payment
 GROUP BY PaymentTypeID
 -- 2a. Do the same as above, but sort it from most frequent payment type to the least frequent
-SELECT  PaymentTypeID,                              -- Non-aggregate column (btw, it's a FK)
+SELECT  PaymentTypeID                            -- Non-aggregate column (btw, it's a FK)
         COUNT(PaymentTypeID) AS 'Count of Pay Type' -- Aggregate column
 FROM    Payment
 GROUP BY PaymentTypeID
-ORDER BY COUNT(PaymentTypeID) ASC
+ORDER BY COUNT(PaymentTypeID) DESC
 /* A note on ORDER BY
    - The ORDER BY clause will, by default, do the sorting in ascending order.
      You can also sort by more than one column (more on that later).
