@@ -27,7 +27,7 @@ FROM    Payment
 GROUP BY PaymentTypeID
 -- 2a. Do the same as above, but sort it from most frequent payment type to the least frequent
 SELECT  PaymentTypeID                            -- Non-aggregate column (btw, it's a FK)
-        COUNT(PaymentTypeID) AS 'Count of Pay Type' -- Aggregate column
+        ,COUNT(PaymentTypeID) AS 'Count of Pay Type' -- Aggregate column
 FROM    Payment
 GROUP BY PaymentTypeID
 ORDER BY COUNT(PaymentTypeID) DESC
@@ -40,6 +40,10 @@ ORDER BY COUNT(PaymentTypeID) DESC
 
 -- 3. Select the average Mark for each studentID. Display the StudentId and their average mark
 -- TODO: Student Answer Here....
+SELECT StudentID,
+      AVG(Mark) AS 'Avg Mark'
+FROM   Registration
+GROUP BY StudentID
 
 -- 4. Select the same data as question 3 but only show the studentID's and averages that are > 80
 SELECT StudentID,
@@ -57,7 +61,7 @@ GROUP BY City
 
 -- 6. Which cities have 2 or more students from them? (HINT, remember that fields that we use in the where or having do not need to be selected.....)
 SELECT  City
---        , COUNT(StudentID) AS 'Student Count'
+--      , COUNT(StudentID) AS 'Student Count'
 FROM    Student
 GROUP BY City
 HAVING COUNT(StudentID) >= 2
@@ -72,7 +76,7 @@ GROUP BY PaymentTypeID
 
 
 -- 8. How many students are there in each club? Show the clubID and the count
--- TODO: Student Answer Here....
+
 
 -- Check your answer by manually grouping students by their club membership and counting them
 SELECT  ClubId, StudentID
@@ -80,9 +84,16 @@ FROM    Activity
 
 -- 9. Which clubs have 3 or more students in them?
 -- TODO: Student Answer Here....
+-- TODO: Student Answer Here....
+
+
 
 
 --10. Grouping the courses by the number of hours in each course, what is the average cost of those courses? Display the course hours and the average cost.
+SELECT  CourseName,
+        COUNT(CourseHours) AS 'Course Hours'
+FROM    Course
+GROUP BY CourseName
 
 --11. Which teachers are getting the best results from the courses they teach? Display the staff ID and the average course mark, sorted by the course mark from highest to lowest.
 
