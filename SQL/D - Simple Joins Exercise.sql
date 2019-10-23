@@ -1,4 +1,6 @@
 --Joins Exercise 1
+--JEGAPRIYA ADHAVAN
+--23 Oct 2019
 USE [A01-School]
 GO
 
@@ -9,6 +11,8 @@ FROM    Student -- Start the FROM statement by identifying one of the tables you
     INNER JOIN Registration -- Identify another table you are connecting to
         -- ON is where we specify which columns should be used in the relationship
         ON Student.StudentID = Registration.StudentID
+--	ORDER BY Registration.CourseId
+
 
 --1.a. Select Student full names, the course ID and the course name that the students are registered in.
 SELECT  FirstName + ' ' + LastName AS 'FullName',
