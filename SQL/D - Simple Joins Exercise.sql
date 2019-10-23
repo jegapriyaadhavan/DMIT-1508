@@ -108,5 +108,20 @@ FROM Student AS S
 	INNER JOIN Registration AS R
 	ON S.StudentID = R.StudentID
 WHERE R.Mark > 80
-ORDER BY R.Mark
+ORDER BY R.Mark -- My answer
+
+SELECT  FirstName + ' ' + LastName AS 'Student Name',
+		CourseId
+FROM Student S
+	INNER JOIN Registration AS R ON S.StudentID = R.StudentID
+WHERE R.Mark > 80  -- Sir's answer
+
+--10. Modify the script from the pervious question to show the Course Name instead of the ID.
+SELECT  FirstName + ' ' + LastName AS 'Student Name',
+		CourseName
+FROM Student S
+	INNER JOIN Registration AS R ON S.StudentID = R.StudentID
+	INNER JOIN Course AS C ON R.CourseId = C.CourseId
+WHERE R.Mark > 80
+
 
