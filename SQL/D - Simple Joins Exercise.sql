@@ -14,10 +14,18 @@ FROM    Student -- Start the FROM statement by identifying one of the tables you
 --	ORDER BY Registration.CourseId
 
 
+
+SELECT S.FirstName + ' ' + S.LastName AS 'FULL NAME',
+	   R.CourseId
+FROM Student AS S
+INNER JOIN Registration AS R 
+ON S.StudentID = R.StudentID
+
+
 --1.a. Select Student full names, the course ID and the course name that the students are registered in.
 SELECT  FirstName + ' ' + LastName AS 'FullName',
         C.CourseId,
-        CourseName
+        C.CourseName
 FROM    Student AS S
     INNER JOIN Registration AS R
         ON S.StudentID = R.StudentID -- ON helps us identify MATCHING data
