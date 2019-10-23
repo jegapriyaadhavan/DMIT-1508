@@ -25,7 +25,7 @@ ON S.StudentID = R.StudentID
 --1.a. Select Student full names, the course ID and the course name that the students are registered in.
 SELECT  FirstName + ' ' + LastName AS 'FullName',
         C.CourseId,
-        C.CourseName
+        CourseName -- Why C.CourseName is not mentioned because CourseName is only in one table, that's Course. So You shouldn't have to mention that in the query.
 FROM    Student AS S
     INNER JOIN Registration AS R
         ON S.StudentID = R.StudentID -- ON helps us identify MATCHING data
@@ -47,6 +47,7 @@ ORDER BY 'Staff Full Name', CourseId
 SELECT  ClubId, FirstName + ' ' + LastName AS 'Student Full Name'
 FROM    Activity A
     INNER JOIN Student S ON A.StudentID = S.StudentID
+	-- Optionally. it could be helpful to sort the results.
 
 --4.	Select the Student full name, courseID's and marks for studentID 199899200.
 SELECT  S.FirstName + ' ' + S.LastName AS 'Student Name',
