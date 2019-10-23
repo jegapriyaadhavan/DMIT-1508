@@ -122,7 +122,15 @@ ORDER BY AVG(R.Mark) DESC
 
 --12. How many male and female students do we have?
 
+--SELECT * FROM Student
+SELECT S.Gender, COUNT(S.StudentID) AS 'Gender Count'
+FROM Student AS S
+GROUP BY S.Gender
+
 --13. Show the average balance owing for male and female students.
+SELECT S.Gender, AVG(S.BalanceOwing)
+FROM Student AS S
+GROUP BY S.Gender
 
 --14. How many students participate in school clubs? Display the club id and the number of students. (Hint: You should be using the Activity table for this question.)
 
