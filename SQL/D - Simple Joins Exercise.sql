@@ -47,7 +47,12 @@ ORDER BY 'Staff Full Name', CourseId
 SELECT  ClubId, FirstName + ' ' + LastName AS 'Student Full Name'
 FROM    Activity A
     INNER JOIN Student S ON A.StudentID = S.StudentID
-	-- Optionally. it could be helpful to sort the results.
+-- Optionally. it could be helpful to sort the results.
+ORDER BY ClubId
+
+/* SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY --- This order is followed in the clause. */
+
+
 
 --4.	Select the Student full name, courseID's and marks for studentID 199899200.
 SELECT  S.FirstName + ' ' + S.LastName AS 'Student Name',
@@ -97,4 +102,11 @@ WHERE   S.StudentID = 199912010
 
 --9. What are the Student Names, courseID's that have Marks > 80?
 -- TODO: Student Answer Here...
+SELECT  S.FirstName + ' ' + S.LastName AS 'Student Name',
+		R.CourseId , R.Mark
+FROM Student AS S
+	INNER JOIN Registration AS R
+	ON S.StudentID = R.StudentID
+WHERE R.Mark > 80
+ORDER BY R.Mark
 
