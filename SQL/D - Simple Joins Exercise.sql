@@ -1,5 +1,5 @@
 --Joins Exercise 1
---JEGAPRIYA ADHAVAN
+
 --23 Oct 2019
 USE [A01-School]
 GO
