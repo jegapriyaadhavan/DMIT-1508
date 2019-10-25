@@ -21,8 +21,30 @@ FROM   Payment P
 WHERE  PaymentTypeDescription = 'cash'
 
 
---2. Select The Student ID's of all the students that are in the 'Association of Computing Machinery' club
+--2. Select The Student ID's of all the students that are in the 'Association of Computing Machinery' club  --MY ANSWER
 -- TODO: Student Answer Here
+SELECT S.StudentID
+FROM Student S
+	INNER JOIN Activity A
+		ON A.StudentID = S.StudentID
+	INNER JOIN Club C
+		ON C.ClubId = A.ClubId
+WHERE C.ClubName = 'Association of Computing Machinery'
+
+
+---SIR ANSWER
+SELECT FirstName + ' ' + LastName
+FROM Student 
+WHERE StudentID IN
+	(SELECT StudentID
+		FROM Activity
+		WHERE ClubId = 
+			(SELECT ClubId FROM Club
+				WHERE ClubName = 'Association of Computing Machinery'))
+
+				SELECT FirstName + ' ' + LastName
+				FROM Student
+				WHERE StudentID IN (199912010,200322620,200495500)
 
 --3. Select All the staff full names for staff that have taught a course.
 SELECT FirstName + ' ' + LastName AS 'Staff'
@@ -37,9 +59,13 @@ FROM Staff
         ON Staff.StaffID = Registration.StaffID 
 
 
---4. Select All the staff full names that taught DMIT172.
+--4. Select All the staff full names that taught DMIT172. --- My answer
 -- TODO: Student Answer Here
-
+SELECT S.FirstName + ' ' + S.LastName AS 'Staff Full Name'
+FROM Staff S
+	INNER JOIN Registration R
+		ON R.StaffID = S.StaffID
+WHERE R.CourseId = 'DMIT172'
 
 --5. Select All the staff full names of staff that have never taught a course
 SELECT FirstName + ' ' + LastName AS 'Staff'
@@ -108,4 +134,5 @@ WHERE City = 'Edm'
 
 --9. What is the avg mark for each of the students from Edm? Display their StudentID and avg(mark)
 -- TODO: Student Answer Here...
+
 
