@@ -59,9 +59,26 @@ AS
     FROM    Staff S
         INNER JOIN Position P ON S.PositionID = P.PositionID
 GO
+--SELECT * FROM RollCall
 
 
 --2.  Create a list of course IDs and the number of students in the course and
 --    UNION that with a list of the course IDs and the MaxStudents of the course.
 --    The columns should be 'Course', 'Count', and 'Type', with the type for the
 --    first list being 'Actual-' + Semester and the type for the second list being 'Planned'.
+
+/*IF OBJECT_ID('list', 'V') IS NOT NULL
+    DROP VIEW list
+GO
+CREATE VIEW list 
+AS
+SELECT C.CourseId AS 'ID', C.MaxStudents 
+FROM Course C
+UNION
+SELECT R.CourseId AS 'ID' , R.Semester, R.WithdrawYN 
+FROM Registration R
+	INNER JOIN Course C
+		ON C.CourseId = R.CourseId
+ORDER BY 'ID' ASC
+GO */ ---- My Query, not executing
+
