@@ -91,7 +91,7 @@ GROUP BY PaymentTypeID
 SELECT  PaymentTypeID
 FROM    Payment
 GROUP BY PaymentTypeID
-HAVING COUNT(PaymentTypeID)  >= ALL (SELECT COUNT(PaymentTypeID)
+HAVING COUNT(PaymentTypeID)  >= ALL (SELECT COUNT(PaymentTypeID)  ---ALL means highest
                                      FROM Payment 
                                      GROUP BY PaymentTypeID)
 
