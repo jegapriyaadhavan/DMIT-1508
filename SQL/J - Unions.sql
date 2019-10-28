@@ -67,6 +67,11 @@ GO
 --    The columns should be 'Course', 'Count', and 'Type', with the type for the
 --    first list being 'Actual-' + Semester and the type for the second list being 'Planned'.
 
+
+
+
+
+
 /*IF OBJECT_ID('list', 'V') IS NOT NULL
     DROP VIEW list
 GO
