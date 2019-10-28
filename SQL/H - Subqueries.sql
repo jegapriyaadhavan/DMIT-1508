@@ -134,5 +134,64 @@ WHERE City = 'Edm'
 
 --9. What is the avg mark for each of the students from Edm? Display their StudentID and avg(mark)
 -- TODO: Student Answer Here...
+SELECT Student.StudentID,
+      AVG(Mark) AS 'Average'
+FROM   Registration 
+    INNER JOIN Student 
+        ON Registration.StudentID = Student.StudentID
+WHERE City = 'Edm'
+GROUP BY Student.StudentID
+
+---10. Which student(s) have the highest average mark? Hint- This can only be done by a subquery.
+--List the average marks of the students; this will be the subquery portion...
+SELECT StudentID,AVG(Mark) FROM Registration GROUP BY StudentID
+--List the students whose average mark is as large as the largest average.
+
+SELECT FirstName + ' ' + LastName AS 'Student Name'
+		, AVG(Mark) AS 'Average Mark'
+FROM Student AS S
+	INNER JOIN Registration AS R
+		ON S.StudentID = R.StudentID
+GROUP BY FirstName, LastName
+HAVING AVG(Mark) >= ALL (SELECT AVG(Mark) FROM Registration WHERE Mark IS NOT NULL GROUP BY StudentID)
+							
+--11. Which course(s) allow the largest classes? Show the course id, name and max class size.
+
+SELECT CourseId, CourseName,MaxStudents
+FROM Course 
+GROUP BY CourseId,CourseName,MaxStudents
+HAVING MAX(MaxStudents) >= ALL 
+	(SELECT MAX(MaxStudents) FROM Course GROUP BY CourseId)
+
+--12. Which course(s) are the most affordable? Show the course name and cost.
+
+SELECT CourseName, MIN(CourseCost)
+FROM Course
+GROUP BY CourseName, CourseCost
+HAVING MIN(CourseCost) <= ALL (SELECT CourseCost FROM Course GROUP BY CourseCost)
 
 
+-- 13. Which staff have taught the largest classes? (Be sure to group registrations by course and semester)
+
+SELECT S.FirstName + ' ' + S.LastName AS 'Staff Name',
+	C.CourseId , R.Semester,MAX(C.MaxStudents) 
+FROM Course AS C
+	INNER JOIN Registration AS R
+		ON R.CourseId = C.CourseId
+	INNER JOIN Staff AS S 
+		ON S.StaffID = R.StaffID
+GROUP BY  S.FirstName, S.LastName, C.CourseId, R.Semester
+HAVING MAX(C.MaxStudents) >=ALL (SELECT  MAX(C.MaxStudents) FROM Course GROUP BY CourseId)
+
+
+--14. Which students are most active in the clubs?
+-- Subquery portion - counts of clubs when grouping by student
+SELECT COUNT(ClubId) FROM Activity GROUP BY StudentID
+--Main Query
+SELECT FirstName, LastName
+FROM Student AS S
+	INNER JOIN Activity AS A
+		ON S.StudentID = A.StudentID
+GROUP BY FirstName,LastName
+HAVING COUNT(ClubId) >= ALL
+	(SELECT COUNT(ClubId) FROM Activity GROUP BY StudentID)
