@@ -38,7 +38,7 @@ SELECT  StaffID AS 'ID',
 FROM    Staff
 WHERE   MONTH(DateHired) = 10
 
-ORDER BY 'ID' DESC
+ORDER BY 'ID' ASC
 GO
 
 -- Create a view called RollCall that has the full name of each staff and student as well as identifying their role in to school.
