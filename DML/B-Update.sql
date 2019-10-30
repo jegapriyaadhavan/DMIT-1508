@@ -20,7 +20,7 @@ GO -- Execute the code up to this point as a single batch
 -- SELECT * FROM Course
 UPDATE Course
 SET    CourseCost = CourseCost * 1.10
-WHERE  CourseName IN ('Expert SQL', 'Quality Assurance')
+WHERE  CourseName IN ('Expert SQL', 'Quality Assurance')-- [where] is necc in [update]
 -- Should see 2 rows affected
 
 -- 2. Along with the goals of the school to make more money, they are allowing
@@ -71,7 +71,7 @@ AS
 GO
 -- SELECT * FROM StudentGrades -- Use to examine the results in the view
 */
---6.  Using the student grades view change the coursename to be 'basket weaving 101'.
+--6.  Using the student grades view change the Capstone coursename to be 'basket weaving 101'.
 
 --7.  Using the student grades view, update the  mark for studentID 199899200 in course dmit152 to be 90.
 

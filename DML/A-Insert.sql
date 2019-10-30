@@ -31,17 +31,27 @@ VALUES ('DMIT777', 'Expert SQL', 90, 450.00)
 
 -- 2. Let's add a new staff member, someone who's really good at SQL
 -- SELECT * FROM STAFF
+SELECT * FROM Position
 INSERT INTO Staff(FirstName, LastName, DateHired, PositionID)
 SELECT 'Dan', 'Gilleland', GETDATE(), PositionID
-       --, PositionDescription
+      -- , PositionDescription
 FROM   Position
 WHERE  PositionDescription = 'Instructor'
 -- 2b. Let's get another instructor
 INSERT INTO Staff(FirstName, LastName, DateHired, PositionID)
-VALUES ('Shane', 'Bell', GETDATE(), 
+VALUES ('Shane', 'Bell', GETDATE(), 4) 
         (SELECT PositionID
         FROM   Position
-        WHERE  PositionDescription = 'Instructor'))
+        WHERE  PositionDescription = 'Instructor')
+-- 2c. We have an open postion in the staff.
+SELECT PositionDescription
+FROM Position
+WHERE PositionID NOT IN (SELECT PositionID FROM Staff)
+-- Add Sheldon Murray as the new Assistant Dean. (He has friends at NAIT)
+
+INSERT INTO Staff(StaffID, FirstName, LastName, DateHired, PositionID)
+VALUES  ('11','Sheldon', 'Murray', GETDATE(), 7)
+
 
 -- 3. There are three additional clubs being started at the school:
 --      - START - Small Tech And Research Teams
@@ -57,7 +67,10 @@ VALUES ('START', 'Small Tech And Research Teams'),
 -- 4. In your web browser, use https://randomuser.me/ to get information on three
 --    people to add as new students. Write separate insert statement for each new student.
 -- TODO: Student Answer Here....
-
+INSERT INTO Student(Gender, LastName, FirstName, Birthdate)
+VALUES ('M','Franklin','Jim','2001-09-07'),
+	   ('F','Willson','Irene','1998-01-11'),
+	   ('M','Cunningham','Allan','2002-10-05')
 
 -- 5. Enroll each of the students you've added into the DMIT104 course.
 --    Use 'Dan Gilleland' as the instructor. At this point, their marks should be NULL.
