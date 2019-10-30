@@ -20,3 +20,7 @@ WHERE  StudentID IN (SELECT StudentID
                      FROM Student
                      WHERE FirstName = 'Flying'
                        AND LastName = 'Nun')
+
+--4. The school is resetting all inactive clubs. Remove those clubs without members (use a subquery).
+-- TODO: Student Answer Here...
+
