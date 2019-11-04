@@ -71,6 +71,7 @@ RETURN
 GO
 
 EXEC FindStudentClubs NULL  -- What do you predict the result will be?
+--Testing with unusual data
 EXEC FindStudentClubs ''    -- What do you predict the result will be?
 GO
 ALTER PROCEDURE FindStudentClubs
@@ -81,10 +82,14 @@ AS
     BEGIN   -- {
         RAISERROR('The partial ID must be two or more characters', 16, 1)
         -- The 16 is the error number and the 1 is the severity
+		-- 16 is free for us to use. others are kind of reserve
     END     -- }
-    SELECT  ClubID, ClubName
-    FROM    Club
-    WHERE   ClubId LIKE @PartialID + '%'
+	ELSE
+	BEGIN
+		SELECT  ClubID, ClubName
+		FROM    Club
+		WHERE   ClubId LIKE @PartialID + '%'
+	END
 RETURN
 GO
 EXEC FindStudentClubs ''    -- What do you predict the result will be?
