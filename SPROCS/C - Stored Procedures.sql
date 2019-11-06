@@ -4,6 +4,19 @@
 USE [A01-School]
 GO
 
+
+/*
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'SprocName')
+    DROP PROCEDURE SprocName
+GO
+CREATE PROCEDURE SprocName
+    -- Parameters here
+AS
+    -- Body of procedure here
+RETURN
+GO
+*/
+
 -- Take the following queries and turn them into stored procedures.
 
 -- 1.   Selects the studentID's, CourseID and mark where the Mark is between 70 and 80
@@ -13,7 +26,24 @@ WHERE   Mark BETWEEN 70 AND 80 -- BETWEEN is inclusive
 --      Place this in a stored procedure that has two parameters,
 --      one for the upper value and one for the lower value.
 --      Call the stored procedure ListStudentMarksByRange
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'ListStudentMarksByRange')
+    DROP PROCEDURE ListStudentMarksByRange
+GO
+CREATE PROCEDURE ListStudentMarksByRange
+    -- Parameters here
+	@UpperValue varchar(10),
+	@LowerValue varchar(10)
+AS
+	
+		SELECT  StudentID, CourseId, Mark
+		FROM    Registration
+		WHERE   Mark BETWEEN 70 AND 80
 
+RETURN
+GO
+
+EXEC ListStudentMarksByRange ''
+GO
 
 /* ----------------------------------------------------- */
 
